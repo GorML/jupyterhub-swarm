@@ -1,4 +1,4 @@
-FROM jupyterhub/jupyterhub:latest
+FROM jupyterhub/jupyterhub:4.0
 
 RUN python3 -m pip install --no-cache-dir \
     dockerspawner \

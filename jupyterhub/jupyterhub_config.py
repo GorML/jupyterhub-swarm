@@ -8,6 +8,8 @@ c.SwarmSpawner.network_name = os.environ["DOCKER_NETWORK_NAME"]
 c.SwarmSpawner.extra_host_config = { 'network_mode': os.environ["DOCKER_NETWORK_NAME"] }
 c.Spawner.extra_placement_spec = { "constraints": ["node.role == worker"] }
 c.JupyterHub.hub_ip = '0.0.0.0'
+c.JupyterHub.hub_connect_ip = 'hub'
+c.Spawner.start_timeout = 60 * 10
 c.JupyterHub.port = 8000
 
 # c.JupyterHub.services = [

@@ -15,12 +15,12 @@ services:
 
     environment:
       DOCKER_NETWORK_NAME: jupyterhub_network
-      DOCKER_NOTEBOOK_IMAGE: jupyterhub-c
+      DOCKER_NOTEBOOK_IMAGE: jupyter/base-notebook
       JUPYTERHUB_ADMINS: hub_admin
       HUB_IP: jupyterhub_network
       
     ports:
-      - 8000:8000
+      - "8000:8000"
 
     # Ensure that we execute on a Swarm manager
     deploy:
