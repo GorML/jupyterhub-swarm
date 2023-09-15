@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  hub:
+    image: jupyterhub-c
+
+    hostname: jupyterhub
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./jupyterhub/jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py"
+
+    networks:
+      - jupyterhub_network
+
+    environment:
+      DOCKER_NETWORK_NAME: jupyterhub_network
+      DOCKER_NOTEBOOK_IMAGE: jupyterhub-c
+      JUPYTERHUB_ADMINS: hub_admin
+      HUB_IP: jupyterhub_network
+      
+    ports:
+      - 8000:8000
+
+    # Ensure that we execute on a Swarm manager
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  jupyterhub_network:
+      name: jupyterhub_network
+      driver: overlay
+      attachable: true
