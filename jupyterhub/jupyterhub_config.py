@@ -29,10 +29,19 @@ c.NativeAuthenticator.open_signup = True
 
 
 # c.Authenticator.admin_users = {"admin"}
+notebook_dir = os.environ.get("DOCKER_NOTEBOOK_DIR", "/home/jovyan/work")
 c.SwarmSpawner.notebook_dir = "/home/jovyan"
 # c.Spawner.default_url = "/lab" # use JupyterLab (instead of Notebook) by default
 
 c.JupyterHub.admin_access = True
+
+# Remove containers once they are stopped
+c.DockerSpawner.remove = True
+
+# Allowed admins
+admin = os.environ.get("JUPYTERHUB_ADMIN")
+if admin:
+    c.Authenticator.admin_users = [admin]
 
 import logging
 c.JupyterHub.log_level = logging.DEBUG

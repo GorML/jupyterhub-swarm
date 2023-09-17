@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   hub:
-    image: jupyterhub-c
+    image: jupyterhub-gpc
 
     hostname: jupyterhub
 
@@ -16,6 +16,7 @@ services:
     environment:
       DOCKER_NETWORK_NAME: jupyterhub_network
       DOCKER_NOTEBOOK_IMAGE: jupyter/base-notebook
+      DOCKER_NOTEBOOK_DIR: /home/jovyan/work
       JUPYTERHUB_ADMINS: hub_admin
       HUB_IP: jupyterhub_network
       
